@@ -12,7 +12,7 @@ function App() {
     const fetchMatches = async () => {
       try {
         setLoading(true)
-        const response = await fetch('http://localhost:5000/api/getUpcomingSoccer')
+        const response = await fetch('https://sports-tracker.onrender.com/api/getUpcomingSoccer')
         const data = await response.json()
         console.log(data)
         setMatches(data)
@@ -26,7 +26,7 @@ function App() {
   }, [])
 
 
-  if (error) return <div>Error loading matches: {error.message}</div>
+  
 
   return (
     <div className="min-h-screen bg-[#fff7f0]">
@@ -44,14 +44,21 @@ function App() {
       <div className="text-center mb-8 text-gray-500">
         Found {matches.length} matches in the next 7 days
       </div>
+      {
+  error && (
+    <div className="text-center text-red-500 font-bold mb-4">
+      Something went wrong In API : {error.message}
+    </div>
+  )
+}
 
       {
         loading ? (
           <div className="grid gap-6 px-4 md:grid-cols-1 lg:grid-cols-2 max-w-6xl mx-auto">
-            <Skeleton height={150} />
-            <Skeleton height={150} />
-            <Skeleton height={150} />
-            <Skeleton height={150} />
+            <Skeleton height={150} baseColor="#a0a0a0" highlightColor="#c0c0c0"  />
+            <Skeleton height={150} baseColor="#a0a0a0" highlightColor="#c0c0c0" />
+            <Skeleton height={150} baseColor="#a0a0a0" highlightColor="#c0c0c0"/>
+            <Skeleton height={150} baseColor="#a0a0a0" highlightColor="#c0c0c0" />
           </div>
         ): (
             <div className="grid gap-6 px-4 md:grid-cols-1 lg:grid-cols-2 max-w-6xl mx-auto">
@@ -131,9 +138,11 @@ function App() {
 
             </div>
         )
-      }
+      } 
     </div>
   )
 }
 
 export default App 
+
+
