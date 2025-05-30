@@ -55,8 +55,10 @@ app.get("/api/getUpcomingSoccer", async (req, res) => {
             id: match.id,
             homeTeam: match.homeTeam.name,
             homeTeamShortName:match.homeTeam.shortName,
+            homeTeamLogo: match.homeTeam.crest,
             awayTeam: match.awayTeam.name,
             awayTeamShortName: match.awayTeam.shortName,
+            awayTeamLogo: match.awayTeam.crest,
             stage:match.stage,
             date: match.utcDate.split('T')[0],  
             time: match.utcDate.split('T')[1].slice(0, 5),  
@@ -65,7 +67,7 @@ app.get("/api/getUpcomingSoccer", async (req, res) => {
             leagueLogo: match.competition.emblem  
         }));
 
-        res.send(matches);
+        res.send(matches    );
     } catch (error) {
         console.error("Error fetching upcoming soccer matches:", error.message);
         res
